@@ -6,11 +6,12 @@ export default function Navigation() {
         <div>
             <div className="navbar bg-base-100">
                 <div className="navbar-start">
-                    <a className="btn btn-ghost text-xl">daisyUI</a>
+                    <a className="btn btn-ghost text-xl">AuthApp</a>
                 </div>
                 <div className="navbar-center hidden lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         <li><Link href="/">Home</Link></li>
+                        <li><Link href="../ContactForm">Contact Form</Link></li>
                         <li><Link href="../Login">Login</Link></li>
                         <li><Link href="../Signup">Signup</Link></li>
                     </ul>
