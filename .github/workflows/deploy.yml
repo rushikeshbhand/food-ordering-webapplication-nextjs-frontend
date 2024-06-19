@@ -32,15 +32,12 @@ jobs:
         run: npm ci
 
       - name: Build with Next.js
-        env:
-          # Make sure the base path is correctly set for GitHub Pages
-          NEXT_PUBLIC_BASE_PATH: '/your-repo-name'
-        run: npm run build && npm run export
+        run: npm run build
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: out
+          path: ./out
 
   deploy:
     environment:

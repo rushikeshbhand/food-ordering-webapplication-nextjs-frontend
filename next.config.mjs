@@ -2,18 +2,9 @@
 const nextConfig = {
   reactStrictMode: true,
   images: {
-    domains: [
-      'img.daisyui.com',
-      'encrypted-tbn0.gstatic.com',
-      'img.freepik.com',
-      'static.vecteezy.com',
-      'www.archanaskitchen.com',
-    ],
-    unoptimized: true, // Disable image optimization for GitHub Pages
+    domains: ['img.daisyui.com', 'encrypted-tbn0.gstatic.com', 'img.freepik.com', 'static.vecteezy.com', 'www.archanaskitchen.com'],
   },
-  basePath: '/food-ordering-webapplication-nextjs-frontend',
-  assetPrefix: '/food-ordering-webapplication-nextjs-frontend/',
-  output: 'export', // Add this line for static export
+  output: 'export'
 };
 
 export default nextConfig;
