@@ -13,7 +13,7 @@ export default function ContactForm() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post('http://localhost:5000/contact', {
+            const response = await axios.post('https://fastfood-nine.vercel.app/contact', {
                 name, email, phoneNumber, message
             });
             console.log(response);

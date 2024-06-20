@@ -13,7 +13,7 @@ export default function CreateProduct() {
         e.preventDefault();
         const productData = {name, price:parseFloat(price), imageUrl}
         try{
-            const response = await axios.post('http://localhost:5000/createProduct', productData)
+            const response = await axios.post('https://fastfood-nine.vercel.app/createProduct', productData)
 
             alert("product created successfully")
         }catch(err){

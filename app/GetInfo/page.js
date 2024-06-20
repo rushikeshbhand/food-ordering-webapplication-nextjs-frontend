@@ -17,7 +17,7 @@ export default function GetInfo() {
             }
 
             // Make GET request to protected route with token in headers
-            const response = await axios.get('http://localhost:5000/getInfo', {
+            const response = await axios.get('https://fastfood-nine.vercel.app/getInfo', {
                 headers: {
                     'auth-token': token
                 }

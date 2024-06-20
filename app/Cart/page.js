@@ -17,7 +17,7 @@ export default function Cart() {
           return;
         }
 
-        const response = await axios.get('http://localhost:5000/cart', {
+        const response = await axios.get('https://fastfood-nine.vercel.app/cart', {
           headers: {
             'auth-token': token
           }
