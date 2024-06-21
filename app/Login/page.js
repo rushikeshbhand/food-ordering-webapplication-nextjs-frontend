@@ -1,4 +1,5 @@
 'use client'
+
 import axios from 'axios'
 import React, { useState } from 'react'
 import Image from 'next/image'
@@ -42,7 +43,7 @@ export default function Login() {
           {error && <p className="mt-3 text-center text-red-500">{error}</p>}
           <div className="mt-4">
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" htmlFor="LoggingEmailAddress">Email Address</label>
-            <input value={email} onChange={(e) => { setEmail(e.target.value) }} id="LoggingEmailAddress" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="email" />
+            <input value={email} onChange={(e) => { setEmail(e.target.value) }} id="LoggingEmailAddress" className="input input-bordered w-full" type="email" />
           </div>
           <div className="mt-4">
             <div className="flex justify-between">
@@ -51,10 +52,10 @@ export default function Login() {
                 Forget Password?
               </Link>
             </div>
-            <input value={password} onChange={(e) => { setPassword(e.target.value) }} id="loggingPassword" className="block w-full px-4 py-2 text-gray-700 bg-white border rounded-lg dark:bg-gray-800 dark:text-gray-300 dark:border-gray-600 focus:border-blue-400 focus:ring-opacity-40 dark:focus:border-blue-300 focus:outline-none focus:ring focus:ring-blue-300" type="password" />
+            <input value={password} onChange={(e) => { setPassword(e.target.value) }} id="loggingPassword" className="input input-bordered w-full" type="password" />
           </div>
           <div className="mt-6">
-            <button className="w-full px-6 py-3 text-sm font-medium tracking-wide text-white capitalize transition-colors duration-300 transform bg-gray-800 rounded-lg hover:bg-gray-700 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-50">
+            <button className="btn btn-primary w-full">
               Log In
             </button>
           </div>

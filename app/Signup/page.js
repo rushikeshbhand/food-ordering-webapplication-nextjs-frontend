@@ -17,18 +17,15 @@ export default function Signup() {
         email,
         password
       })
-      const {message, token, createdUser} = response.data; //In axios response comes inside data object
+      const { message, token, createdUser } = response.data; // In axios response comes inside data object
       console.log(`message and token and created user is : ${message} and ${token} and user is ${JSON.stringify(createdUser)}`)
 
       // store the token in the local storage 
       localStorage.setItem('token', token)
       alert(`${response.data.createdUser.username} is successfully registered`)
-    }
-    
-    catch (err) {
+    } catch (err) {
       console.log(err.message);
       alert(`enter all credentials to signup`)
-
     }
   }
 
@@ -53,14 +50,13 @@ export default function Signup() {
             </p>
             <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 mt-8 ">
               <div>
-                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">username</label>
+                <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Username</label>
                 <input
                   type="text"
-
                   value={username}
                   onChange={(e) => { setUsername(e.target.value) }}
                   placeholder="Enter username"
-                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  className="input input-bordered w-full"
                 />
               </div>
 
@@ -71,7 +67,7 @@ export default function Signup() {
                   value={email}
                   onChange={(e) => { setEmail(e.target.value) }}
                   placeholder="johnsnow@example.com"
-                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  className="input input-bordered w-full"
                 />
               </div>
 
@@ -82,14 +78,13 @@ export default function Signup() {
                   value={password}
                   onChange={(e) => { setPassword(e.target.value) }}
                   placeholder="Enter your password"
-                  className="block w-full px-5 py-3 mt-2 text-gray-700 placeholder-gray-400 bg-white border border-gray-200 rounded-lg dark:placeholder-gray-600 dark:bg-gray-900 dark:text-gray-300 dark:border-gray-700 focus:border-blue-400 dark:focus:border-blue-400 focus:ring-blue-400 focus:outline-none focus:ring focus:ring-opacity-40"
+                  className="input input-bordered w-full"
                 />
               </div>
 
-              <button className="flex items-center justify-between w-full px-6 py-3 text-sm tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-500 rounded-lg hover:bg-blue-400 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-50">
+              <button className="btn btn-primary w-full">
                 <span>Sign Up </span>
-
-                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 rtl:-scale-x-100" viewBox="0 0 20 20" fill="currentColor">
+                <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path
                     fillRule="evenodd"
                     d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z"
