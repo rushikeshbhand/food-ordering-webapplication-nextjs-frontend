@@ -10,7 +10,7 @@ export default function ShowProducts() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const response = await axios.get('https://fastfood-nine.vercel.app/products');
+        const response = await axios.get('https://food-ordering-webapplication-nodejs-backend.vercel.app/products');
         setProducts(response.data.products);
          // Set the products state with the response data
       } catch (err) {
@@ -32,7 +32,7 @@ export default function ShowProducts() {
       }
   
       const response = await axios.post(
-        'https://fastfood-nine.vercel.app/addToCart',
+        'https://food-ordering-webapplication-nodejs-backend.vercel.app/addToCart',
         { productId },  // Correctly sending the productId in the body
         {
           headers: {

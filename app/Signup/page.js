@@ -12,7 +12,7 @@ export default function Signup() {
   const handleSubmit = async (e) => {
     e.preventDefault()
     try {
-      const response = await axios.post('https://fastfood-nine.vercel.app/createUser', {
+      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', {
         username,
         email,
         password

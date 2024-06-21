@@ -14,7 +14,7 @@ export default function Login() {
     e.preventDefault();
     try {
       const loginData = { email, password };
-      const response = await axios.post('https://fastfood-nine.vercel.app/login', loginData);
+      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/login', loginData);
       console.log(response.data);
   
       const { message, token, user } = response.data; // Correct destructuring
