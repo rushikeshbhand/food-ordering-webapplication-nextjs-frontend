@@ -31,11 +31,11 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white mt-20 rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
+      <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white mt-20 mb-10 rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
         <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: "url('https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg')" }}></div>
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto">
-            <Image className="w-auto h-7 sm:h-8" src="https://merakiui.com/images/logo.svg" alt="Logo" width={32} height={32} />
+            <Image className="w-auto h-7 sm:h-8" src="/logo.png" alt="Logo" width={100} height={100} />
           </div>
           <p className="mt-3 text-xl text-center text-gray-600 dark:text-gray-200">
             Welcome back!
@@ -43,7 +43,7 @@ export default function Login() {
           {error && <p className="mt-3 text-center text-red-500">{error}</p>}
           <div className="mt-4">
             <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" htmlFor="LoggingEmailAddress">Email Address</label>
-            <input value={email} onChange={(e) => { setEmail(e.target.value) }} id="LoggingEmailAddress" className="input input-bordered w-full" type="email" />
+            <input value={email} onChange={(e) => { setEmail(e.target.value) }} id="LoggingEmailAddress" className="input input-bordered w-full" placeholder='rushikesh@example.com' type="email" />
           </div>
           <div className="mt-4">
             <div className="flex justify-between">
@@ -52,7 +52,7 @@ export default function Login() {
                 Forget Password?
               </Link>
             </div>
-            <input value={password} onChange={(e) => { setPassword(e.target.value) }} id="loggingPassword" className="input input-bordered w-full" type="password" />
+            <input value={password} onChange={(e) => { setPassword(e.target.value) }} id="loggingPassword" className="input input-bordered w-full" placeholder="Enter your password" type="password" />
           </div>
           <div className="mt-6">
             <button className="btn btn-primary w-full">

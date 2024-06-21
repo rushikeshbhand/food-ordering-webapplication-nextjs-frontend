@@ -33,7 +33,7 @@ export default function Navigation() {
 
       {/* Mobile view for navbar */}
       <div className="lg:hidden ">
-        <div className="flex justify-between items-center p-4 sticky top-0 z-50">
+        <div className="flex justify-between items-center p-4">
           <a className="btn btn-ghost normal-case text-xl"><Image src="/logo.png" width={80} height={80} alt="" /></a>
           <button className="btn btn-square btn-ghost" onClick={handleOnClick}>
             {isOpen ? (
@@ -48,7 +48,7 @@ export default function Navigation() {
           </button>
         </div>
         {isOpen && (
-          <div className="bg-base-500 sticky top-0 z-50">
+          <div className="bg-base-500">
             <ul className="flex flex-col gap-4 text-center p-2">
               <li><Link href="/">Home</Link></li>
               <li><Link href="/ShowProducts">Get your favourite food</Link></li>

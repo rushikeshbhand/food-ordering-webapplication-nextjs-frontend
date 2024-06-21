@@ -66,7 +66,7 @@ export default function Signup() {
                   type="email"
                   value={email}
                   onChange={(e) => { setEmail(e.target.value) }}
-                  placeholder="johnsnow@example.com"
+                  placeholder="rushikesh@example.com"
                   className="input input-bordered w-full"
                 />
               </div>

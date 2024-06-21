@@ -23,7 +23,7 @@ export default function CreateProduct() {
         }
     }
     return (
-        <div className='border max-w-4xl mx-auto mt-12'>
+        <div className='border max-w-4xl mx-auto mt-12 mb-10'>
             <h1 className='text-center py-7 font-mono text-3xl underline drop-shadow-xl '>Create Product</h1>
             <form onSubmit={handleSubmit} className='flex flex-col gap-5 max-w-xl mx-auto pb-12 px-10 '>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter product name" className="input input-bordered w-full max-w-xl" />
