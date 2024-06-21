@@ -1,80 +1,40 @@
-import Image from "next/image";
+'use client'
+
+import Link from 'next/link'
+import Spline from '@splinetool/react-spline/next';
+import { useEffect } from 'react';
 
 export default function Home() {
+
   return (
-    <div className="flex justify-center items-center min-h-screen bg-gray-100">
-      <div className="carousel rounded-box w-full max-w-6xl">
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1559703248-dcaaec9fab78.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1565098772267-60af42b81ef2.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1572635148818-ef6fd45eb394.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1494253109108-2e30c049369b.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1550258987-190a2d41a8ba.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1559181567-c3190ca9959b.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
-        <div className="carousel-item w-full md:w-1/3">
-          <Image
-            src="https://img.daisyui.com/images/stock/photo-1601004890684-d8cbf643f5f2.jpg"
-            layout="responsive"
-            width={800}
-            height={450}
-            alt="Sample"
-            className="w-full h-auto"
-          />
-        </div>
+    <main className='min-h-screen flex flex-col md:flex-row items-center bg-teal-50'>
+      <div className='p-8 md:w-1/2'>
+        <h1 className='text-4xl md:text-5xl font-semibold text-amber-500'>
+          Hungry? We’ve Got You Covered <br />
+          <span className='text-rose-600'>– Fresh, Tasty, and Delivered Fast!</span>
+        </h1>
+        <button className='mt-6 px-6 py-3 bg-rose-600 text-amber-100 font-medium text-lg rounded-lg shadow-lg hover:bg-amber-600 transition duration-300'>
+          <Link href="/ShowProducts">Order Now</Link>
+        </button>
       </div>
-    </div>
+      <div className='w-full md:w-1/2'>
+      <Spline
+        scene="https://prod.spline.design/NCyrkbqtxDoiZS1j/scene.splinecode" 
+      />
+      </div>
+    </main>
   );
 }
+
+
+
+
+// import Spline from '@splinetool/react-spline/next';
+
+// export default function Home() {
+//   return (
+//     <main>
+      
+//     </main>
+//   );
+// }
