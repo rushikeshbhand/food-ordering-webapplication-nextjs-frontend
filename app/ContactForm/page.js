@@ -30,7 +30,7 @@ export default function ContactForm() {
             // Hide the toast after 3 seconds
             setTimeout(() => setShowToast(false), 5000);
         } catch (error) {
-            alert("enter all details for contact")
+            alert("Data is not able to send to server from client side")
             console.log(error.message);
         }
     }
