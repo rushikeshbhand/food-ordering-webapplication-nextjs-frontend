@@ -10,7 +10,7 @@ const FAQ = () => {
 
     const faqs = [
         {
-            question: "Question: How can I place an order?",
+            question: "How can I place an order?",
             answer: "Placing an order is simple! Browse our menu, select the items you want, add them to your cart, and proceed to checkout. You'll need to provide your delivery address and payment information to complete your order."
         },
         {
@@ -33,7 +33,7 @@ const FAQ = () => {
 
     return (
         <section className="bg-white dark:bg-gray-900">
-            <div className="container px-6 py-10 mx-auto">
+            <div className="container px-6 py-10 mx-auto max-w-3xl">
                 <h1 className="text-2xl font-semibold text-gray-800 lg:text-3xl dark:text-white">FAQ</h1>
                 <hr className="my-6 border-gray-200 dark:border-gray-700" />
                 <div>
