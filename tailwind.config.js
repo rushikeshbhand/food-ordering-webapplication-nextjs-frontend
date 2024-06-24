@@ -12,7 +12,11 @@ module.exports = {
   ],
 
   theme: {
-    extend: {
+    extend:
+     {
+      fontFamily: {
+        'sans': ['Helvetica', 'Arial', 'sans-serif'],
+      },
       height: {
         'custom-1': '1000px',
         'custom-2': '300px',
