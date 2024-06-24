@@ -16,7 +16,7 @@ export default function Home() {
             Hungry? We’ve Got You Covered <br />
             <span className='bg-clip-text text-transparent bg-gradient-to-r from-yellow-500 to-rose-600'>– Fresh, Tasty, and Delivered Fast!</span>
           </h1>
-          <button className='mt-6 px-6 py-3 bg-rose-600 text-amber-100 font-medium text-lg rounded-lg shadow-lg hover:shadow-lg hover:shadow-orange-700 hover:bg-amber-600 transition duration-300'>
+          <button className='mt-6 px-6 py-3 bg-gradient-to-r from-rose-500 to-yellow-500 hover:from-yellow-500 hover:to-rose-500 font-medium text-lg rounded-lg shadow-lg hover:shadow-lg transition duration-300'>
             <Link href="/ShowProducts">Order Now</Link>
           </button>
         </div>

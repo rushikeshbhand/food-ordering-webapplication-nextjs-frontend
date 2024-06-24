@@ -37,7 +37,7 @@ export default function ContactForm() {
 
     return (
         <div className='border max-w-4xl mx-auto mb-10 mt-12 p-6 rounded-lg shadow-lg'>
-            <h1 className='text-center py-7 font-mono text-3xl underline drop-shadow-xl'>Contact Form</h1>
+            <h1 className='text-center py-7 text-opacity-5 text-2xl  drop-shadow-xl'>Contact Us</h1>
             <form onSubmit={handleSubmit} className='flex flex-col gap-5 max-w-xl mx-auto pb-12 px-10'>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" className="input input-bordered w-full max-w-xl" />
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" className="input input-bordered w-full max-w-xl" />
