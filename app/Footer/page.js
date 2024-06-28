@@ -3,8 +3,8 @@ import Image from 'next/image'
 
 export default function Footer() {
     return (
-        <div>
-            <footer className="footer p-10 bg-base-200 text-base-content ">
+        <div className=''>
+            <footer className="footer p-10 dark:text-white dark:bg-slate-900 ">
                 <nav>
                     <h6 className="footer-title">Services</h6>
                     <a className="link link-hover">Branding</a>
@@ -26,7 +26,7 @@ export default function Footer() {
                     <a className="link link-hover">Cookie policy</a>
                 </nav>
             </footer>
-            <footer className="footer px-10 py-4 border-t bg-base-200 text-base-content border-base-300">
+            <footer className="footer px-10 py-4 border-t dark:text-white dark:bg-slate-900 border-base-300">
                 <aside className="items-center grid-flow-col">
                     <Image src='/logo.png' width={50} height={50} alt=''></Image>
                     <p>ACME Industries Ltd. <br />Providing reliable tech since 1992</p>

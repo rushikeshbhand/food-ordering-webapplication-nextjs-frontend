@@ -9,12 +9,13 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@splinetool/react-spline": "^4.0.0",
+    "@reduxjs/toolkit": "^2.2.5",
     "autoprefixer": "^10.4.19",
     "axios": "^1.7.2",
     "next": "14.2.4",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "react-redux": "^9.1.2"
   },
   "devDependencies": {
     "daisyui": "^4.12.2",

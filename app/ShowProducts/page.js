@@ -49,12 +49,12 @@ export default function ShowProducts() {
   
 
   return (
-    <div className="flex flex-wrap justify-center gap-3 lg:gap-20 mt-11">
+    <div className="flex flex-wrap justify-center gap-3 lg:gap-20 pt-10 dark:bg-slate-900">
       {products.map((product, index) => (
         <div key={index} className="w-full sm:w-1/2 md:w-1/3 p-2">
-          <div className="h-full bg-white rounded-lg shadow-lg dark:bg-gray-800 mx-auto transition-transform transform hover:scale-105">
-            <div className="px-4 py-2">
-              <h1 className="text-xl font-bold text-gray-800 uppercase dark:text-white">{product.name}</h1>
+          <div className="h-full bg-slate-900 text-slate-300 rounded-lg shadow-lg dark:bg-slate-800 mx-auto transition-transform transform hover:scale-105">
+            <div className="px-4 py-2 dark:text-black">
+              <h1 className="text-xl font-bold text-slate-300 uppercase dark:text-white">{product.name}</h1>
             </div>
             <div className="relative w-full h-64 overflow-hidden">
               <Image
@@ -65,7 +65,7 @@ export default function ShowProducts() {
                 className="rounded-t-lg"
               />
             </div>
-            <div className="flex items-center justify-between px-4 py-2 bg-gray-900">
+            <div className="flex items-center justify-between px-4 py-2 dark:bg-slate-800">
               <h1 className="text-lg font-bold text-white">₹ {product.price}</h1>
               <button onClick={() => handleAddToCart(product._id)} className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Add to cart</button>
             </div>

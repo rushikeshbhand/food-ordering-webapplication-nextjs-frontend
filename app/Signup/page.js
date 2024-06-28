@@ -30,7 +30,7 @@ export default function Signup() {
   }
 
   return (
-    <section className="bg-white dark:bg-gray-900">
+    <section className="bg-white dark:bg-slate-900">
       <div className="flex justify-center min-h-screen">
         <div
           className="hidden bg-cover lg:block lg:w-2/5"

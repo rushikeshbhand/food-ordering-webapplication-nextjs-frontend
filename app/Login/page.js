@@ -31,7 +31,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white mt-20 mb-10 rounded-lg shadow-lg dark:bg-gray-800 lg:max-w-4xl">
+      <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white mt-20 mb-10 rounded-lg shadow-lg dark:bg-slate-900 lg:max-w-4xl">
         <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: "url('https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg')" }}></div>
         <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
           <div className="flex justify-center mx-auto">
