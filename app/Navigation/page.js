@@ -109,7 +109,7 @@ export default function Navigation() {
                     <Link href="/" className="btn btn-ghost normal-case text-xl">
                         <Image src="/logo.png" width={80} height={80} alt="Logo" />
                     </Link>
-                    <div>
+                    <div className='flex gap-4'>
                           <button onClick={()=>{setTheme(!theme)}}>
                             {(theme)? (
                             <><IoIosSunny className='text-white text-3xl transition ease-out duration-1000' /></>
