@@ -9,10 +9,22 @@ import { clearTokenAndUser } from '../redux/authSlice';
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
+    const [theme, setTheme] = useState(localStorage.getItem('theme'));
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
+
+    useEffect(()=>{
+      if(theme) {
+        document.documentElement.classList.add('dark')
+        localStorage.setItem('theme','dark')
+      }
+      else{
+        document.documentElement.classList.remove('dark')
+        localStorage.removeItem('theme','dark')
+      }
+    },[theme])
 
     const handleOnClick = () => {
         setIsOpen(!isOpen);
@@ -43,6 +55,11 @@ export default function Navigation() {
                         <li><Link href="/Cart">Cart</Link></li>
                         <li><Link href="/Orders">Orders</Link></li>
                         <li><Link href="/ContactForm">Contact Us</Link></li>
+                        <li>
+                          <button onClick={()=>{setTheme(!theme)}}>
+                            {(theme)? (<>Light</>) : (<>Dark</>)}
+                          </button>
+                        </li>
                         {token ? (
                             <>
                                 <li><button onClick={handleLogout}>Logout</button></li>
