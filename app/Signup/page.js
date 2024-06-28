@@ -1,33 +1,34 @@
-'use client'
+'use client';
 
-import React from 'react';
+import { useDispatch } from 'react-redux';
+import React, { useState } from 'react';
 import axios from 'axios';
-import { useState } from 'react';
+import { setTokenAndUser } from '../redux/authSlice';
 
 export default function Signup() {
-  const [username, setUsername] = useState("")
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
+    const [username, setUsername] = useState("");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault()
-    try {
-      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', {
-        username,
-        email,
-        password
-      })
-      const { message, token, createdUser } = response.data; // In axios response comes inside data object
-      console.log(`message and token and created user is : ${message} and ${token} and user is ${JSON.stringify(createdUser)}`)
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', {
+                username,
+                email,
+                password
+            });
 
-      // store the token in the local storage 
-      localStorage.setItem('token', token)
-      alert(`${response.data.createdUser.username} is successfully registered`)
-    } catch (err) {
-      console.log(err.message);
-      alert(`enter all credentials to signup`)
-    }
-  }
+            const { message, token, createdUser } = response.data;
+            dispatch(setTokenAndUser({ token, user: createdUser }));
+            localStorage.setItem('token', token);
+            alert(`${createdUser.username} is successfully registered`);
+        } catch (err) {
+            console.log(err.message);
+            alert(`Enter all credentials to signup`);
+        }
+    };
 
   return (
     <section className="bg-white dark:bg-slate-900">

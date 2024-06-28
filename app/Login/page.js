@@ -1,33 +1,35 @@
-'use client'
+'use client';
 
-import axios from 'axios'
-import React, { useState } from 'react'
-import Image from 'next/image'
-import Link from 'next/link'
+import axios from 'axios';
+import React, { useState } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
+import { useDispatch } from 'react-redux';
+import { setTokenAndUser } from '../redux/authSlice';
 
 export default function Login() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [error, setError] = useState(null)
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+    const [error, setError] = useState(null);
+    const dispatch = useDispatch();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const loginData = { email, password };
-      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/login', loginData);
-      console.log(response.data);
-  
-      const { message, token, user } = response.data; // Correct destructuring
-      localStorage.setItem('token', token);
-      alert(`${user.username} is successfully logged in`);
-      console.log("Login is successful");
-    } catch (err) {
-      console.error(err);
-      setError(err.response?.data?.message || "An error occurred");
-      alert("enter valid login details");
-    }
-  };
-  
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const loginData = { email, password };
+            const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/login', loginData);
+
+            const { message, token, user } = response.data;
+            dispatch(setTokenAndUser({ token, user }));
+            localStorage.setItem('token', token);
+            alert(`${user.username} is successfully logged in`);
+        } catch (err) {
+            console.error(err);
+            setError(err.response?.data?.message || "An error occurred");
+            alert("Enter valid login details");
+        }
+    };
+
 
   return (
     <form onSubmit={handleSubmit}>
