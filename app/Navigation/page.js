@@ -9,12 +9,17 @@ import { clearTokenAndUser } from '../redux/authSlice';
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
-    const [theme, setTheme] = useState(localStorage.getItem('theme'));
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
-
+    
+    const [theme, setTheme] = useState(() => {
+      if (typeof window !== 'undefined') {
+          return localStorage.getItem('theme');
+      }
+      return 'light'; // default theme
+  });    
     useEffect(()=>{
       if(theme) {
         document.documentElement.classList.add('dark')
