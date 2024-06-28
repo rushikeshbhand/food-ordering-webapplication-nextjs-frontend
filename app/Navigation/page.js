@@ -7,6 +7,11 @@ import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
 import { clearTokenAndUser } from '../redux/authSlice';
 
+// react icons
+import { IoIosSunny } from "react-icons/io";
+import { IoMdMoon } from "react-icons/io";
+
+
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
@@ -62,7 +67,11 @@ export default function Navigation() {
                         <li><Link href="/ContactForm">Contact Us</Link></li>
                         <li>
                           <button onClick={()=>{setTheme(!theme)}}>
-                            {(theme)? (<>Light</>) : (<>Dark</>)}
+                            {(theme)? (
+                            <><IoIosSunny className='text-white text-xl transition ease-out duration-1000' /></>
+                            ): (
+                            <><IoMdMoon className='text-xl transition ease-out duration-1000'/></>
+                            )}
                           </button>
                         </li>
                         {token ? (
@@ -100,6 +109,15 @@ export default function Navigation() {
                     <Link href="/" className="btn btn-ghost normal-case text-xl">
                         <Image src="/logo.png" width={80} height={80} alt="Logo" />
                     </Link>
+                    <div>
+                          <button onClick={()=>{setTheme(!theme)}}>
+                            {(theme)? (
+                            <><IoIosSunny className='text-white text-3xl transition ease-out duration-1000' /></>
+                            ): (
+                            <><IoMdMoon className='text-3xl transition ease-out duration-1000'/></>
+                            )}
+                          </button>
+                    
                     <button className="btn btn-square btn-ghost" onClick={handleOnClick}>
                         {isOpen ? (
                             <div>
@@ -113,6 +131,7 @@ export default function Navigation() {
                             </svg>
                         )}
                     </button>
+                    </div>
                 </div>
                 {isOpen && (
                     <div className="bg-base-500">
