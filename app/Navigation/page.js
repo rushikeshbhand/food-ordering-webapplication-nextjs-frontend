@@ -13,7 +13,7 @@ import { IoMdMoon } from "react-icons/io";
 
 
 export default function Navigation() {
-    const [isOpen, setIsOpen] = useState(false);
+    const [isOpen, setIsOpen] = useState(true);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
