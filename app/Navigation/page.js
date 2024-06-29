@@ -1,7 +1,7 @@
 // components/Navigation.js
 'use client';
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
@@ -13,19 +13,22 @@ import { IoMdMoon } from "react-icons/io";
 
 
 export default function Navigation() {
-    const [isOpen, setIsOpen] = useState(true);
+    const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    const token = useSelector((state) => state.auth.token);
+    // const token = useSelector((state) => state.auth.token);
+    const [token, setToken]= useState()
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
     
     const [theme, setTheme] = useState(() => {
       if (typeof window !== 'undefined') {
-          return localStorage.getItem('theme');
+          return 'dark'
       }
-      return 'light'; // default theme
+      return 'dark'; // default theme
   });    
     useEffect(()=>{
+    //   localStorage.getItem(token)
+
       if(theme) {
         document.documentElement.classList.add('dark')
         localStorage.setItem('theme','dark')
@@ -35,6 +38,9 @@ export default function Navigation() {
         localStorage.removeItem('theme','dark')
       }
     },[theme])
+
+    // setToken(tokenRef.current)
+    
 
     const handleOnClick = () => {
         setIsOpen(!isOpen);
