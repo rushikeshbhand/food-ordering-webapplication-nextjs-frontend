@@ -27,7 +27,7 @@ export default function ContactForm() {
             // Show the toast
             setShowToast(true);
 
-            // Hide the toast after 3 seconds
+            // Hide the toast after 5 seconds
             setTimeout(() => setShowToast(false), 5000);
         } catch (error) {
             alert("Data is not able to send to server from client side")
@@ -36,8 +36,8 @@ export default function ContactForm() {
     }
 
     return (
-        <div className='border max-w-4xl mx-auto mb-10 mt-12 p-6 rounded-lg shadow-lg dark:bg-slate-900 dark:text-white'>
-            <h1 className='text-center py-7 text-opacity-5 text-2xl  drop-shadow-xl'>Contact Us</h1>
+        <div className='border text-black max-w-4xl mx-auto mb-10 mt-12 p-6 rounded-lg shadow-lg dark:bg-slate-900 dark:text-black'>
+            <h1 className='text-center py-7 text-opacity-5 text-2xl dark:text-white  drop-shadow-xl'>Contact Us</h1>
             <form onSubmit={handleSubmit} className='flex flex-col gap-5 max-w-xl mx-auto pb-12 px-10'>
                 <input type="text" value={name} onChange={(e) => setName(e.target.value)} placeholder="Enter your name" className="input input-bordered w-full max-w-xl" />
                 <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter your email" className="input input-bordered w-full max-w-xl" />
