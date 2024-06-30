@@ -3,6 +3,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
+import { useSelector } from 'react-redux';
 
 export default function Cart() {
   const [cart, setCart] = useState(null);
@@ -17,7 +18,7 @@ export default function Cart() {
           return;
         }
 
-        const response = await axios.get('https://fastfood-nine.vercel.app/cart', {
+        const response = await axios.get('https://food-ordering-webapplication-nodejs-backend.vercel.app/cart', {
           headers: {
             'auth-token': token
           }
