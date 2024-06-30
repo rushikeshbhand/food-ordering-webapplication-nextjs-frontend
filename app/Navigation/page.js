@@ -1,46 +1,42 @@
 // components/Navigation.js
 'use client';
 
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useDispatch, useSelector } from 'react-redux';
-import { clearTokenAndUser } from '../redux/authSlice';
+import { setTokenAndUser, clearTokenAndUser } from '../redux/authSlice';
 
 // react icons
 import { IoIosSunny } from "react-icons/io";
 import { IoMdMoon } from "react-icons/io";
 
-
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-    // const token = useSelector((state) => state.auth.token);
-    const [token, setToken]= useState()
+    const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
-    
+
     const [theme, setTheme] = useState(() => {
-      if (typeof window !== 'undefined') {
-          return 'dark'
-      }
-      return 'dark'; // default theme
-  });    
-    useEffect(()=>{
-    //   localStorage.getItem(token)
+        if (typeof window !== 'undefined') {
+            return localStorage.getItem('theme') || 'dark';
+        }
+        return 'dark'; // default theme
+    });
 
-      if(theme) {
-        document.documentElement.classList.add('dark')
-        localStorage.setItem('theme','dark')
-      }
-      else{
-        document.documentElement.classList.remove('dark')
-        localStorage.removeItem('theme','dark')
-      }
-    },[theme])
+    useEffect(() => {
+        const storedToken = localStorage.getItem('token');
+        if (storedToken) {
+            dispatch(setTokenAndUser({ token: storedToken, user: JSON.parse(localStorage.getItem('user')) }));
+        }
 
-    // setToken(tokenRef.current)
-    
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }, [theme, dispatch]);
 
     const handleOnClick = () => {
         setIsOpen(!isOpen);
@@ -48,11 +44,18 @@ export default function Navigation() {
 
     const handleLogout = () => {
         localStorage.removeItem('token');
+        localStorage.removeItem('user');
         dispatch(clearTokenAndUser());
     };
 
     const toggleDropdown = () => {
         setIsDropdownOpen(!isDropdownOpen);
+    };
+
+    const toggleTheme = () => {
+        const newTheme = theme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+        localStorage.setItem('theme', newTheme);
     };
 
     return (
@@ -68,17 +71,26 @@ export default function Navigation() {
                     <ul className="menu menu-horizontal px-1 dark:text-white navbar-headings">
                         <li><Link href="/">Home</Link></li>
                         <li><Link href="/ShowProducts">Get your favourite food</Link></li>
-                        <li><Link href="/Cart">Cart</Link></li>
-                        <li><Link href="/Orders">Orders</Link></li>
+                        {
+                            (token) ? (<>
+                                <li><Link href="/Cart">Cart</Link></li>
+                                <li><Link href="/Orders">Orders</Link></li>
+                            </>) :
+                                (<>
+                                    {null}
+                                </>)
+                        }
+
+
                         <li><Link href="/ContactForm">Contact Us</Link></li>
                         <li>
-                          <button onClick={()=>{setTheme(!theme)}}>
-                            {(theme)? (
-                            <><IoIosSunny className='text-white text-xl transition ease-out duration-1000' /></>
-                            ): (
-                            <><IoMdMoon className='text-xl transition ease-out duration-1000'/></>
-                            )}
-                          </button>
+                            <button onClick={toggleTheme}>
+                                {theme === 'dark' ? (
+                                    <IoIosSunny className='text-white text-xl transition ease-out duration-1000' />
+                                ) : (
+                                    <IoMdMoon className='text-xl transition ease-out duration-1000' />
+                                )}
+                            </button>
                         </li>
                         {token ? (
                             <>
@@ -116,27 +128,24 @@ export default function Navigation() {
                         <Image src="/logo.png" width={80} height={80} alt="Logo" />
                     </Link>
                     <div className='flex gap-4'>
-                          <button onClick={()=>{setTheme(!theme)}}>
-                            {(theme)? (
-                            <><IoIosSunny className='text-white text-3xl transition ease-out duration-1000' /></>
-                            ): (
-                            <><IoMdMoon className='text-3xl transition ease-out duration-1000'/></>
+                        <button onClick={toggleTheme}>
+                            {theme === 'dark' ? (
+                                <IoIosSunny className='text-white text-3xl transition ease-out duration-1000' />
+                            ) : (
+                                <IoMdMoon className='text-3xl transition ease-out duration-1000' />
                             )}
-                          </button>
-                    
-                    <button className="btn btn-square btn-ghost" onClick={handleOnClick}>
-                        {isOpen ? (
-                            <div>
+                        </button>
+                        <button className="btn btn-square btn-ghost" onClick={handleOnClick}>
+                            {isOpen ? (
                                 <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
-                            </div>
-                        ) : (
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
-                            </svg>
-                        )}
-                    </button>
+                            ) : (
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
+                                </svg>
+                            )}
+                        </button>
                     </div>
                 </div>
                 {isOpen && (
@@ -144,8 +153,15 @@ export default function Navigation() {
                         <ul className="flex flex-col gap-4 text-center p-2 text-black dark:text-white pb-10">
                             <li><Link href="/">Home</Link></li>
                             <li><Link href="/ShowProducts">Get your favourite food</Link></li>
-                            <li><Link href="/Cart">Cart</Link></li>
-                            <li><Link href="/Orders">Orders</Link></li>
+                            {
+                            (token) ? (<>
+                                <li><Link href="/Cart">Cart</Link></li>
+                                <li><Link href="/Orders">Orders</Link></li>
+                            </>) :
+                                (<>
+                                    {null}
+                                </>)
+                        }
                             <li><Link href="/ContactForm">Contact Us</Link></li>
                             {token ? (
                                 <>
