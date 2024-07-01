@@ -75,7 +75,7 @@ export default function Cart() {
             <span>Total:</span>
             <span>₹ {totalPrice}</span>
           </div>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Proceed to Checkout</button>
+          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Place Order</button>
         </div>
       </div>
     </div>
