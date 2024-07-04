@@ -1,4 +1,5 @@
 import React from 'react'
+import Link from 'next/link'
 import Image from 'next/image'
 
 export default function Footer() {
@@ -7,23 +8,23 @@ export default function Footer() {
             <footer className="footer p-10 dark:text-white dark:bg-slate-900 ">
                 <nav>
                     <h6 className="footer-title">Services</h6>
-                    <a className="link link-hover">Branding</a>
-                    <a className="link link-hover">Design</a>
-                    <a className="link link-hover">Marketing</a>
-                    <a className="link link-hover">Advertisement</a>
+                    <Link href="" className="link link-hover">Food selling services</Link>
+                    <Link href="" className="link link-hover">Restaurant</Link>
+                    <Link href="" className="link link-hover">Web Development</Link>
+                    <Link href="" className="link link-hover">Software Development</Link>
                 </nav>
                 <nav>
                     <h6 className="footer-title">Company</h6>
-                    <a className="link link-hover">About us</a>
-                    <a className="link link-hover">Contact</a>
-                    <a className="link link-hover">Jobs</a>
-                    <a className="link link-hover">Press kit</a>
+                    <Link href="/AboutUs"  className="link link-hover">About us</Link>
+                    <Link href="/ContactForm"  className="link link-hover">Contact</Link>
+                    <Link href="" className="link link-hover">Jobs</Link>
+                    <Link href="/Pricing"  className="link link-hover">Pricing </Link>
                 </nav>
                 <nav>
                     <h6 className="footer-title">Legal</h6>
-                    <a className="link link-hover">Terms of use</a>
-                    <a className="link link-hover">Privacy policy</a>
-                    <a className="link link-hover">Cookie policy</a>
+                    <Link href="/TermsAndConditions" className="link link-hover">Terms and conditions</Link>
+                    <Link href="/PrivacyPolicy" className="link link-hover">Privacy policy</Link>
+                    <Link href="/RefundPolicy" className="link link-hover">Refund policy</Link>
                 </nav>
             </footer>
             <footer className="footer px-10 py-4 border-t dark:text-white dark:bg-slate-900 border-base-300">
