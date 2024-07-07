@@ -117,17 +117,31 @@ export default function Navigation() {
                     <Link href="/" className="btn btn-ghost normal-case text-xl">
                         <Image src="/logo.png" width={80} height={80} alt="Logo" />
                     </Link>
-                    <div className='flex gap-4'>
+                    <div className='flex gap-4 items-center'>
                         <div className="flex items-center">
                             {token ? (
                                 theme === 'dark' ? (
-                                    <FaCartArrowDown  className='text-white text-3xl'/>
+                                    <FaCartArrowDown className='text-white text-3xl' />
                                 ) : (
                                     <Link className="text-3xl" href="/Cart">
                                         <FaCartArrowDown />
                                     </Link>
                                 )
                             ) : null}
+                        </div>
+
+                        <div>
+                            {
+                                (token) ?
+                                    (<li className="relative flex item">
+                                            <div className="avatar">
+                                                <div className="w-8 rounded-full">
+                                                    <Image src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" width={32} height={32} alt="Profile" />
+                                                </div>
+                                            </div>
+                                    </li>)
+                                    : null
+                            }
                         </div>
 
                         <button onClick={toggleTheme}>
@@ -159,15 +173,6 @@ export default function Navigation() {
                             {token ? (
                                 <>
                                     <li><button onClick={handleLogout}>Logout</button></li>
-                                    <li className="relative">
-                                        <button className="btn btn-ghost">
-                                            <div className="avatar">
-                                                <div className="w-8 rounded-full">
-                                                    <Image src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" width={32} height={32} alt="Profile" />
-                                                </div>
-                                            </div>
-                                        </button>
-                                    </li>
                                 </>
                             ) : (
                                 <>
