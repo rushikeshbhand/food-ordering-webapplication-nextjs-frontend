@@ -69,7 +69,7 @@ export default function Navigation() {
                         {
                             (token) ? (<>
                                 <li><Link href="/Cart">Cart</Link></li>
-                                <li><Link href="/Orders">Orders</Link></li>
+                                {/* <li><Link href="/Orders">Orders</Link></li> */}
                             </>) :
                                 (<>
                                     {null}
@@ -145,7 +145,7 @@ export default function Navigation() {
                             {
                             (token) ? (<>
                                 <li><Link href="/Cart">Cart</Link></li>
-                                <li><Link href="/Orders">Orders</Link></li>
+                                {/* <li><Link href="/Orders">Orders</Link></li> */}
                             </>) :
                                 (<>
                                     {null}
