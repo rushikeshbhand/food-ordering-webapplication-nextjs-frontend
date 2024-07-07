@@ -3,7 +3,6 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import axios from 'axios';
-import Script from 'next/script';
 
 export default function ShowProducts() {
   const [products, setProducts] = useState([]);
@@ -20,6 +19,17 @@ export default function ShowProducts() {
     };
 
     fetchProducts();
+  }, []);
+
+  useEffect(() => {
+    // Dynamically load the Razorpay script
+    const script = document.createElement('script');
+    script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+    script.async = true;
+    script.onload = () => {
+      setRazorpayLoaded(true);
+    };
+    document.body.appendChild(script);
   }, []);
 
   const handleAddToCart = async (productId) => {
@@ -60,7 +70,7 @@ export default function ShowProducts() {
       }
 
       const response = await axios.post(
-        'https://food-ordering-webapplication-nodejs-backend.vercel.app/createOrder',
+        'http://localhost:5000/createOrder',
         { amount: product.price, currency: 'INR' },
         {
           headers: {
@@ -86,7 +96,7 @@ export default function ShowProducts() {
 
   const initiatePayment = (orderId, product) => {
     const options = {
-      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Ensure this key is available in the environment variables
+      key: 'rzp_test_B5AQGkgOO8mrC0', // Your Razorpay key
       amount: product.price * 100,
       currency: 'INR',
       name: 'Fast Foods India',
@@ -111,39 +121,32 @@ export default function ShowProducts() {
   };
 
   return (
-    <div>
-      <Script 
-        src="https://checkout.razorpay.com/v1/checkout.js" 
-        strategy="lazyOnload" 
-        onLoad={() => setRazorpayLoaded(true)} 
-      />
-      <div className="flex flex-wrap min-h-screen justify-center gap-3 lg:gap-20 pt-10 dark:bg-slate-900">
-        {products.map((product) => (
-          <div key={product._id} className="w-full sm:w-1/2 md:w-1/3 p-2">
-            <div className="h-full bg-slate-900 text-slate-300 rounded-lg shadow-lg dark:bg-slate-800 mx-auto transition-transform transform hover:scale-105">
-              <div className="px-4 py-2 dark:text-black">
-                <h1 className="text-xl font-bold text-slate-300 uppercase dark:text-white">{product.name}</h1>
-              </div>
-              <div className="relative w-full h-64 overflow-hidden">
-                <Image
-                  src={product.imageUrl}
-                  alt={product.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="rounded-t-lg"
-                />
-              </div>
-              <div className="flex items-center justify-between px-4 py-2 dark:bg-slate-800">
-                <h1 className="text-lg font-bold text-white">₹ {product.price}</h1>
-                <div>
-                  <button onClick={() => handleAddToCart(product._id)} className="mr-5 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Add to cart</button>
-                  <button onClick={() => handleBuyNow(product)} className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Buy Now</button>
-                </div>
+    <div className="flex flex-wrap justify-center gap-3 lg:gap-20 pt-10 dark:bg-slate-900">
+      {products.map((product) => (
+        <div key={product._id} className="w-full sm:w-1/2 md:w-1/3 p-2">
+          <div className="h-full bg-slate-900 text-slate-300 rounded-lg shadow-lg dark:bg-slate-800 mx-auto transition-transform transform hover:scale-105">
+            <div className="px-4 py-2 dark:text-black">
+              <h1 className="text-xl font-bold text-slate-300 uppercase dark:text-white">{product.name}</h1>
+            </div>
+            <div className="relative w-full h-64 overflow-hidden">
+              <Image
+                src={product.imageUrl}
+                alt={product.name}
+                layout="fill"
+                objectFit="cover"
+                className="rounded-t-lg"
+              />
+            </div>
+            <div className="flex items-center justify-between px-4 py-2 dark:bg-slate-800">
+              <h1 className="text-lg font-bold text-white">₹ {product.price}</h1>
+              <div>
+                <button onClick={() => handleAddToCart(product._id)} className="mr-5 px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Add to cart</button>
+                <button onClick={() => handleBuyNow(product)} className="px-2 py-1 text-xs font-semibold text-gray-900 uppercase transition-colors duration-300 transform bg-white rounded hover:bg-gray-200 focus:bg-gray-400 focus:outline-none">Buy Now</button>
               </div>
             </div>
           </div>
-        ))}
-      </div>
+        </div>
+      ))}
     </div>
   );
 }
