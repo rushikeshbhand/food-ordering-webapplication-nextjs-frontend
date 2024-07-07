@@ -117,7 +117,7 @@ export default function ShowProducts() {
         strategy="lazyOnload" 
         onLoad={() => setRazorpayLoaded(true)} 
       />
-      <div className="flex flex-wrap justify-center gap-3 lg:gap-20 pt-10 dark:bg-slate-900">
+      <div className="flex flex-wrap min-h-screen justify-center gap-3 lg:gap-20 pt-10 dark:bg-slate-900">
         {products.map((product) => (
           <div key={product._id} className="w-full sm:w-1/2 md:w-1/3 p-2">
             <div className="h-full bg-slate-900 text-slate-300 rounded-lg shadow-lg dark:bg-slate-800 mx-auto transition-transform transform hover:scale-105">
