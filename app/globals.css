@@ -107,3 +107,34 @@
     transform: scaleX(0.7);
   }
 }
+
+/* order button  */
+@keyframes gradientBG {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradientShadow {
+  0% {
+    box-shadow: 0 4px 6px -1px rgba(15, 203, 75, 0.4), 0 2px 4px -1px rgba(245, 85, 85, 0.4);
+  }
+  50% {
+    box-shadow: 0 4px 6px -1px rgba(117, 16, 205, 0.4), 0 2px 4px -1px rgba(100, 129, 33, 0.4);
+  }
+  100% {
+    box-shadow: 0 4px 6px -1px rgba(202, 111, 20, 0.4), 0 2px 4px -1px rgba(245, 85, 85, 0.4);
+  }
+}
+
+.animated-gradient {
+  background: linear-gradient(270deg, #c44b1f, #eedc17);
+  background-size: 400% 400%;
+  animation: gradientBG 4s ease infinite, gradientShadow 3s ease infinite;
+}
