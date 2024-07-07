@@ -6,6 +6,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { setTokenAndUser } from '../redux/authSlice';
+import { useRouter } from 'next/navigation';
 
 export default function Login() {
   const [email, setEmail] = useState("");
@@ -13,6 +14,8 @@ export default function Login() {
   const [error, setError] = useState(null);
   const dispatch = useDispatch();
   const [showToast, setshowToast] = useState(false)
+
+  const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -23,6 +26,9 @@ export default function Login() {
       const { message, token, user } = response.data;
       dispatch(setTokenAndUser({ token, user }));
       localStorage.setItem('token', token);
+      setEmail("");
+      setPassword("");
+      router.push('/')
       setshowToast(true)
     } catch (err) {
       console.error(err);
