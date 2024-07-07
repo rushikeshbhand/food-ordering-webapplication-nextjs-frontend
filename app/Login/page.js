@@ -28,8 +28,8 @@ export default function Login() {
       localStorage.setItem('token', token);
       setEmail("");
       setPassword("");
-      router.push('/')
       setshowToast(true)
+      router.push('/')
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "An error occurred");

@@ -26,10 +26,11 @@ export default function Signup() {
       const { message, token, createdUser } = response.data;
       dispatch(setTokenAndUser({ token, user: createdUser }));
       localStorage.setItem('token', token);
+      
+      setShowToast(true)
 
       router.push('/')
 
-      setShowToast(true)
     } catch (err) {
       console.log(err.message);
       alert(`Enter all credentials to signup`);
