@@ -7,29 +7,30 @@ import Link from 'next/link';
 import { useDispatch } from 'react-redux';
 import { setTokenAndUser } from '../redux/authSlice';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
 export default function Login() {
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState(null);
   const dispatch = useDispatch();
-  const [showToast, setshowToast] = useState(false)
-
   const router = useRouter();
+  const [error, setError] = useState(null);
+  const [showToast, setshowToast] = useState(false);
+  
+  const { 
+    register, 
+    handleSubmit, 
+    formState: { errors } 
+  } = useForm();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const onSubmit = async (data) => {
     try {
-      const loginData = { email, password };
-      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/login', loginData);
+      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/login', data);
 
       const { message, token, user } = response.data;
       dispatch(setTokenAndUser({ token, user }));
       localStorage.setItem('token', token);
-      setEmail("");
-      setPassword("");
-      setshowToast(true)
-      router.push('/')
+      
+      setshowToast(true);
+      router.push('/');
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || "An error occurred");
@@ -37,10 +38,9 @@ export default function Login() {
     }
   };
 
-
   return (
     <>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="flex w-full max-w-sm mx-auto overflow-hidden bg-white mt-20 mb-10 rounded-lg shadow-lg dark:bg-slate-900 lg:max-w-4xl">
           <div className="hidden bg-cover lg:block lg:w-1/2" style={{ backgroundImage: "url('https://www.foodiesfeed.com/wp-content/uploads/2023/06/burger-with-melted-cheese.jpg')" }}></div>
           <div className="w-full px-6 py-8 md:px-8 lg:w-1/2">
@@ -53,7 +53,20 @@ export default function Login() {
             {error && <p className="mt-3 text-center text-red-500">{error}</p>}
             <div className="mt-4">
               <label className="block mb-2 text-sm font-medium text-gray-600 dark:text-gray-200" htmlFor="LoggingEmailAddress">Email Address</label>
-              <input value={email} onChange={(e) => { setEmail(e.target.value) }} id="LoggingEmailAddress" className="input input-bordered w-full" placeholder='rushikesh@example.com' type="email" />
+              <input 
+                id="LoggingEmailAddress"
+                className="input input-bordered w-full" 
+                placeholder='rushikesh@example.com' 
+                type="email"
+                {...register('email', {
+                  required: 'Email is required',
+                  pattern: {
+                    value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                    message: 'Enter a valid email address'
+                  }
+                })}
+              />
+              {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
             </div>
             <div className="mt-4">
               <div className="flex justify-between">
@@ -62,7 +75,20 @@ export default function Login() {
                   Forget Password?
                 </Link>
               </div>
-              <input value={password} onChange={(e) => { setPassword(e.target.value) }} id="loggingPassword" className="input input-bordered w-full" placeholder="Enter your password" type="password" />
+              <input 
+                id="loggingPassword"
+                className="input input-bordered w-full" 
+                placeholder="Enter your password" 
+                type="password"
+                {...register('password', {
+                  required: 'Password is required',
+                  minLength: {
+                    value: 6,
+                    message: 'Password must be at least 6 characters long'
+                  }
+                })}
+              />
+              {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}
             </div>
             <div className="mt-6">
               <button className="btn btn-primary w-full">
@@ -80,15 +106,13 @@ export default function Login() {
         </div>
       </form>
 
-      {
-        showToast && (
-          <div className="toast toast-top toast-end">
-            <div className="alert alert-success">
-              <span>login successfully</span>
-            </div>
+      {showToast && (
+        <div className="toast toast-top toast-end">
+          <div className="alert alert-success">
+            <span>login successfully</span>
           </div>
-        )
-      }
+        </div>
+      )}
     </>
   )
 }

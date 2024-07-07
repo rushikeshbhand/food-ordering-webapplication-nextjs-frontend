@@ -5,32 +5,29 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { setTokenAndUser } from '../redux/authSlice';
 import { useRouter } from 'next/navigation';
+import { useForm } from 'react-hook-form';
 
 export default function Signup() {
-  const [username, setUsername] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const dispatch = useDispatch();
-  const [showToast, setShowToast] = useState(false)
-
   const router = useRouter();
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  const [showToast, setShowToast] = useState(false);
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm();
+
+  const onSubmit = async (data) => {
     try {
-      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', {
-        username,
-        email,
-        password
-      });
+      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', data);
 
       const { message, token, createdUser } = response.data;
       dispatch(setTokenAndUser({ token, user: createdUser }));
       localStorage.setItem('token', token);
-      
-      setShowToast(true)
 
-      router.push('/')
-
+      setShowToast(true);
+      router.push('/');
     } catch (err) {
       console.log(err.message);
       alert(`Enter all credentials to signup`);
@@ -56,42 +53,54 @@ export default function Signup() {
             <p className="mt-4 text-gray-500 dark:text-gray-400">
               Let’s get you all set up so you can verify your personal account and begin setting up your profile.
             </p>
-            <form onSubmit={handleSubmit} className="grid grid-cols-1 gap-6 mt-8 ">
+            <form onSubmit={handleSubmit(onSubmit)} className="grid grid-cols-1 gap-6 mt-8">
               <div>
                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Username</label>
                 <input
                   type="text"
-                  value={username}
-                  onChange={(e) => { setUsername(e.target.value) }}
                   placeholder="Enter username"
                   className="input input-bordered w-full"
+                  {...register('username', { required: 'Username is required' })}
                 />
+                {errors.username && <span className="text-red-600 text-sm">{errors.username.message}</span>}
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Email address</label>
                 <input
                   type="email"
-                  value={email}
-                  onChange={(e) => { setEmail(e.target.value) }}
                   placeholder="rushikesh@example.com"
                   className="input input-bordered w-full"
+                  {...register('email', {
+                    required: 'Email is required',
+                    pattern: {
+                      value: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
+                      message: 'Enter a valid email address',
+                    },
+                  })}
                 />
+                {errors.email && <span className="text-red-600 text-sm">{errors.email.message}</span>}
               </div>
 
               <div>
                 <label className="block mb-2 text-sm text-gray-600 dark:text-gray-200">Password</label>
                 <input
                   type="password"
-                  value={password}
-                  onChange={(e) => { setPassword(e.target.value) }}
                   placeholder="Enter your password"
                   className="input input-bordered w-full"
+                  {...register('password', {
+                    required: 'Password is required',
+                    minLength: {
+                      value: 6,
+                      message: 'Password must be at least 6 characters long',
+                    },
+                  })}
                 />
+                {errors.password && <span className="text-red-600 text-sm">{errors.password.message}</span>}
               </div>
 
               <button className="btn btn-primary w-full">
-                <span>Sign Up </span>
+                <span>Sign Up</span>
                 <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 ml-2" viewBox="0 0 20 20" fill="currentColor">
                   <path
                     fillRule="evenodd"
@@ -106,13 +115,12 @@ export default function Signup() {
       </div>
 
       {showToast && (
-          <div className="toast toast-top toast-end">
-            <div className="alert alert-success">
-              <span>Account created successfully.</span>
-            </div>
+        <div className="toast toast-top toast-end">
+          <div className="alert alert-success">
+            <span>Account created successfully.</span>
           </div>
-        )
-      }
+        </div>
+      )}
     </section>
   );
 }
