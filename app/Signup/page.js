@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import React, { useState } from 'react';
 import axios from 'axios';
 import { setTokenAndUser } from '../redux/authSlice';
+import { useRouter } from 'next/navigation';
 
 export default function Signup() {
   const [username, setUsername] = useState("");
@@ -12,6 +13,7 @@ export default function Signup() {
   const dispatch = useDispatch();
   const [showToast, setShowToast] = useState(false)
 
+  const router = useRouter();
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
@@ -24,6 +26,9 @@ export default function Signup() {
       const { message, token, createdUser } = response.data;
       dispatch(setTokenAndUser({ token, user: createdUser }));
       localStorage.setItem('token', token);
+
+      router.push('/')
+
       setShowToast(true)
     } catch (err) {
       console.log(err.message);
