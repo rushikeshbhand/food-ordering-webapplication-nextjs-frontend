@@ -3,10 +3,10 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
 
 export default function Cart() {
   const [cart, setCart] = useState(null);
+  const [razorpayLoaded, setRazorpayLoaded] = useState(false);
 
   useEffect(() => {
     const fetchCart = async () => {
@@ -31,6 +31,105 @@ export default function Cart() {
     };
 
     fetchCart();
+  }, []);
+
+  const handleRemoveFromCart = async (productId) => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log("No token found");
+        alert('Token not found. Please login or signup if you don\'t have an account.');
+        return;
+      }
+
+      const response = await axios.post(
+        'https://food-ordering-webapplication-nodejs-backend.vercel.app/removeFromCart',
+        { productId },
+        {
+          headers: {
+            'auth-token': token
+          }
+        }
+      );
+
+      console.log(response.data);
+      setCart(response.data.cart);
+    } catch (error) {
+      console.log("Error removing product from cart:", error);
+    }
+  };
+
+  const handlePlaceOrder = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        console.log("No token found");
+        alert('Token not found. Please login or signup if you don\'t have an account.');
+        return;
+      }
+
+      const response = await axios.post(
+        'https://food-ordering-webapplication-nodejs-backend.vercel.app/placeOrder',
+        {},
+        {
+          headers: {
+            'auth-token': token,
+            'Content-Type': 'application/json'
+          }
+        }
+      );
+
+      console.log("Order placed successfully", response.data);
+      var orderId = response.data.id;
+
+      if (razorpayLoaded) {
+        initiatePayment(orderId, response.data.amount);
+      } else {
+        console.log('Razorpay SDK not loaded');
+      }
+    } catch (error) {
+      console.log("Error placing order:", error);
+    }
+  };
+
+  const initiatePayment = (orderId, amount) => {
+    const options = {
+      key: process.env.NEXT_PUBLIC_RAZORPAY_KEY_ID, // Ensure this key is available in the environment variables
+      amount: amount,
+      currency: 'INR',
+      name: 'Fast Foods India',
+      description: 'Payment for order',
+      order_id: orderId,
+      handler: function (response) {
+        alert('Payment successful!');
+        console.log(response);
+      },
+      prefill: {
+        name: 'Customer Name', // Optional: Replace with actual customer name
+        email: 'customer@example.com', // Optional: Replace with actual customer email
+        contact: '9999999999' // Optional: Replace with actual customer contact
+      },
+      theme: {
+        color: '#F37254' // Optional: Replace with your brand color
+      }
+    };
+
+    const rzp = new Razorpay(options);
+    rzp.open();
+  };
+
+  useEffect(() => {
+    const loadRazorpayScript = () => {
+      const script = document.createElement('script');
+      script.src = 'https://checkout.razorpay.com/v1/checkout.js';
+      script.async = true;
+      script.onload = () => {
+        setRazorpayLoaded(true);
+      };
+      document.body.appendChild(script);
+    };
+
+    loadRazorpayScript();
   }, []);
 
   if (!cart) {
@@ -58,6 +157,9 @@ export default function Cart() {
                 <h2 className="text-lg font-semibold">{product.name}</h2>
                 <p className="text-gray-500">₹ {product.price}</p>
               </div>
+              <button onClick={() => handleRemoveFromCart(product._id)} className="ml-auto px-4 py-2 text-white bg-red-500 rounded-lg hover:bg-red-600">
+                Remove
+              </button>
             </div>
           ))}
         </div>
@@ -75,7 +177,9 @@ export default function Cart() {
             <span>Total:</span>
             <span>₹ {totalPrice}</span>
           </div>
-          <button className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">Place Order</button>
+          <button onClick={handlePlaceOrder} className="bg-blue-500 text-white py-2 px-4 rounded-lg hover:bg-blue-600">
+            Place Order
+          </button>
         </div>
       </div>
     </div>
