@@ -6,29 +6,30 @@ import axios from 'axios';
 import { setTokenAndUser } from '../redux/authSlice';
 
 export default function Signup() {
-    const [username, setUsername] = useState("");
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const dispatch = useDispatch();
+  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
+  const [showToast, setShowToast] = useState(false)
 
-    const handleSubmit = async (e) => {
-        e.preventDefault();
-        try {
-            const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', {
-                username,
-                email,
-                password
-            });
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.post('https://food-ordering-webapplication-nodejs-backend.vercel.app/createUser', {
+        username,
+        email,
+        password
+      });
 
-            const { message, token, createdUser } = response.data;
-            dispatch(setTokenAndUser({ token, user: createdUser }));
-            localStorage.setItem('token', token);
-            alert(`${createdUser.username} is successfully registered`);
-        } catch (err) {
-            console.log(err.message);
-            alert(`Enter all credentials to signup`);
-        }
-    };
+      const { message, token, createdUser } = response.data;
+      dispatch(setTokenAndUser({ token, user: createdUser }));
+      localStorage.setItem('token', token);
+      setShowToast(true)
+    } catch (err) {
+      console.log(err.message);
+      alert(`Enter all credentials to signup`);
+    }
+  };
 
   return (
     <section className="bg-white dark:bg-slate-900">
@@ -97,6 +98,15 @@ export default function Signup() {
           </div>
         </div>
       </div>
+
+      {showToast && (
+          <div className="toast toast-top toast-end">
+            <div className="alert alert-success">
+              <span>Account created successfully.</span>
+            </div>
+          </div>
+        )
+      }
     </section>
   );
 }
