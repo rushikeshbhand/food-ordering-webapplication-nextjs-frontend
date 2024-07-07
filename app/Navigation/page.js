@@ -10,6 +10,7 @@ import { setTokenAndUser, clearTokenAndUser } from '../redux/authSlice';
 // react icons
 import { IoIosSunny } from "react-icons/io";
 import { IoMdMoon } from "react-icons/io";
+import { FaCartArrowDown } from "react-icons/fa";
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
@@ -117,6 +118,18 @@ export default function Navigation() {
                         <Image src="/logo.png" width={80} height={80} alt="Logo" />
                     </Link>
                     <div className='flex gap-4'>
+                        <div className="flex items-center">
+                            {token ? (
+                                theme === 'dark' ? (
+                                    <FaCartArrowDown  className='text-white text-3xl'/>
+                                ) : (
+                                    <Link className="text-3xl" href="/Cart">
+                                        <FaCartArrowDown />
+                                    </Link>
+                                )
+                            ) : null}
+                        </div>
+
                         <button onClick={toggleTheme}>
                             {theme === 'dark' ? (
                                 <IoIosSunny className='text-white text-3xl transition ease-out duration-1000' />
@@ -126,11 +139,11 @@ export default function Navigation() {
                         </button>
                         <button className="btn btn-square btn-ghost" onClick={handleOnClick}>
                             {isOpen ? (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
                                 </svg>
                             ) : (
-                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 rounded-full dark:bg-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7" />
                                 </svg>
                             )}
@@ -142,15 +155,6 @@ export default function Navigation() {
                         <ul className="flex flex-col gap-4 text-center p-2 text-black dark:text-white pb-10">
                             <li><Link href="/">Home</Link></li>
                             <li><Link href="/ShowProducts">Get your favourite food</Link></li>
-                            {
-                            (token) ? (<>
-                                <li><Link href="/Cart">Cart</Link></li>
-                                {/* <li><Link href="/Orders">Orders</Link></li> */}
-                            </>) :
-                                (<>
-                                    {null}
-                                </>)
-                        }
                             <li><Link href="/ContactForm">Contact Us</Link></li>
                             {token ? (
                                 <>
