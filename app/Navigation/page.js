@@ -13,7 +13,6 @@ import { IoMdMoon } from "react-icons/io";
 
 export default function Navigation() {
     const [isOpen, setIsOpen] = useState(false);
-    const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const token = useSelector((state) => state.auth.token);
     const user = useSelector((state) => state.auth.user);
     const dispatch = useDispatch();
@@ -46,10 +45,6 @@ export default function Navigation() {
         localStorage.removeItem('token');
         localStorage.removeItem('user');
         dispatch(clearTokenAndUser());
-    };
-
-    const toggleDropdown = () => {
-        setIsDropdownOpen(!isDropdownOpen);
     };
 
     const toggleTheme = () => {
@@ -96,19 +91,13 @@ export default function Navigation() {
                             <>
                                 <li><button onClick={handleLogout}>Logout</button></li>
                                 <li className="relative">
-                                    <button onClick={toggleDropdown} className="btn btn-ghost">
+                                    <button className="btn btn-ghost">
                                         <div className="avatar">
                                             <div className="w-8 rounded-full">
                                                 <Image src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" width={32} height={32} alt="Profile" />
                                             </div>
                                         </div>
                                     </button>
-                                    {isDropdownOpen && (
-                                        <ul className="menu dropdown-content mt-2 bg-base-100 rounded-box z-[1] w-52 p-2 shadow absolute right-0">
-                                            <li><Link href="/UserProfile">Profile</Link></li>
-                                            <li><button onClick={handleLogout}>Logout</button></li>
-                                        </ul>
-                                    )}
                                 </li>
                             </>
                         ) : (
@@ -167,19 +156,13 @@ export default function Navigation() {
                                 <>
                                     <li><button onClick={handleLogout}>Logout</button></li>
                                     <li className="relative">
-                                        <button onClick={toggleDropdown} className="btn btn-ghost">
+                                        <button className="btn btn-ghost">
                                             <div className="avatar">
                                                 <div className="w-8 rounded-full">
                                                     <Image src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" width={32} height={32} alt="Profile" />
                                                 </div>
                                             </div>
                                         </button>
-                                        {isDropdownOpen && (
-                                            <ul className="menu dropdown-content mt-2 bg-base-100 rounded-box z-[1] w-52 p-2 shadow absolute right-0">
-                                                <li><Link href="/UserProfile">Profile</Link></li>
-                                                <li><button onClick={handleLogout}>Logout</button></li>
-                                            </ul>
-                                        )}
                                     </li>
                                 </>
                             ) : (
