@@ -121,7 +121,9 @@ export default function Navigation() {
                         <div className="flex items-center">
                             {token ? (
                                 theme === 'dark' ? (
-                                    <FaCartArrowDown className='text-white text-3xl' />
+                                    <Link href="/Cart">
+                                        <FaCartArrowDown className='text-white text-3xl' />
+                                    </Link>
                                 ) : (
                                     <Link className="text-3xl" href="/Cart">
                                         <FaCartArrowDown />
@@ -134,11 +136,11 @@ export default function Navigation() {
                             {
                                 (token) ?
                                     (<li className="relative flex item">
-                                            <div className="avatar">
-                                                <div className="w-8 rounded-full">
-                                                    <Image src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" width={32} height={32} alt="Profile" />
-                                                </div>
+                                        <div className="avatar">
+                                            <div className="w-8 rounded-full">
+                                                <Image src="https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" width={32} height={32} alt="Profile" />
                                             </div>
+                                        </div>
                                     </li>)
                                     : null
                             }
